@@ -16,7 +16,7 @@ function tab-reset() {
     else
         default_profile='Default'
     fi
-    echo -e "\033]50;SetProfile=$NAME\a"
+    echo -e "\033]50;SetProfile=$default_profile\a"
 }
 
 function colordocker(){
@@ -34,8 +34,5 @@ function color-docker-compose(){
     fi
     docker-compose $*
 }
-compdef _ssh tabc=ssh
-
-alias ssh="colorssh"
 alias docker="colordocker"
 alias docker-compose="color-docker-compose"

@@ -34,5 +34,13 @@ function color-docker-compose(){
     fi
     docker-compose $*
 }
+
+function colorssh(){
+    trap "tab-reset" INT EXIT
+    tabc ssh
+    ssh $*
+}
+
+alias ssh="colorssh"
 alias docker="colordocker"
 alias docker-compose="color-docker-compose"

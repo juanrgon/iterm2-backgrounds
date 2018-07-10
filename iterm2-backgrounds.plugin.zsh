@@ -10,7 +10,7 @@ function tab-reset() {
 }
 
 function colordocker(){
-    if [[ "$*" =~ " -it " ]]; then
+    if [[ "$*" =~ " -it " ]] || if [[ "$*" =~ " -i "  && "$*" =~ " -t "]]; then
         trap "tab-reset" INT TERM
         tabc Docker
     fi
@@ -19,7 +19,7 @@ function colordocker(){
 }
 
 function color-docker-compose(){
-    if [[ "$1" =~ "exec" ]]; then
+    if [[ "$1" == "exec" ]] || [[ "$1" == "run" ]] || if [["$*" =~ " -i "  && "$*" =~ " -t "]]; then
         trap "tab-reset" INT TERM
         tabc Docker
     fi

@@ -3,7 +3,7 @@ function flash-iterm-profile () {
     # Temporarily changes iTerm profile until the next command line prompt
     #
     # Args:
-    # $1 Name of the profile we're switching to; defaults to the original profile loaded
+    # $1 - Name of the profile we're switching to; defaults to the original profile loaded
     PROFILE=${1:-$ITERM_PROFILE}
 
     if [[ "$PROFILE" == $ITERM_PROFILE ]]; then

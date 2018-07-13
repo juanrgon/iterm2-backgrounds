@@ -4,7 +4,7 @@ function tabc() {
 
     if [[ "$PROFILE" == $ITERM_PROFILE ]]; then
         # Add a hook to switch back to the default profile on the next prompt
-        add-zsh-hook -d preexec tabc
+        add-zsh-hook -d precmd tabc
     else
         # Remove hook to switch back to the default profile on the next prompt
         add-zsh-hook precmd tabc

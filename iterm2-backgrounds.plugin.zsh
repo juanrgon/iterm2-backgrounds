@@ -1,37 +1,40 @@
+autoload -Uz add-zsh-hook
 function tabc() {
-    NAME=$1; if [ -z "$NAME" ]; then NAME=$ITERM_PROFILE; fi
-    # if you have trouble with this, change
-    # "Default" to the name of your default theme
-    echo -e "\033]50;SetProfile=$NAME\a"
-}
+    PROFILE="${1:-$ITERM_PROFILE}"  # Name of the profile we're switching to
 
-function tab-reset() {
-    tabc $ITERM_PROFILE
+    if [[ "$PROFILE" == $ITERM_PROFILE ]]; then
+        # Add a hook to switch back to the default profile on the next prompt
+        add-zsh-hook -d preexec tabc
+    else
+        # Remove hook to switch back to the default profile on the next prompt
+        add-zsh-hook precmd tabc
+    fi
+    echo -e "\033]50;SetProfile=$PROFILE\a"
 }
 
 function colordocker(){
     if [[ "$*" =~ " -it " || ("$*" =~ " -i "  && "$*" =~ " -t ")]]; then
-        trap "tab-reset" INT TERM
         tabc Docker
     fi
+
+    disable -a docker
     docker $*
-    tab-reset
 }
 
 function color-docker-compose(){
     if [[ "$1" == "exec" || "$1" == "run" ]]; then
-        trap "tab-reset" INT TERM
         tabc Docker
     fi
+
+    disable -a docker-compose
     docker-compose $*
-    tab-reset
 }
 
 function colorssh(){
-    trap "tab-reset" INT TERM
     tabc ssh
+
+    disable -a ssh
     ssh $*
-    tab-reset
 }
 
 alias ssh="colorssh"

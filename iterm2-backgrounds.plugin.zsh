@@ -18,7 +18,7 @@ function flash-iterm-profile () {
 
 function color-docker (){
     if [[ "$*" =~ " -it " || ("$*" =~ " -i "  && "$*" =~ " -t ")]]; then
-        fip Docker
+        flash-iterm-profile Docker
     fi
 
     disable -a docker
@@ -27,7 +27,7 @@ function color-docker (){
 
 function color-docker-compose (){
     if [[ "$1" == "exec" || "$1" == "run" ]]; then
-        fip Docker
+        flash-iterm-profile Docker
     fi
 
     disable -a docker-compose
@@ -35,12 +35,12 @@ function color-docker-compose (){
 }
 
 function color-ssh (){
-    fip ssh
+    flash-iterm-profile ssh
     disable -a ssh
     ssh $*
 }
 
-alias fip='flash-iterm-profile'
+alias fip="flash-iterm-profile"
 alias ssh="color-ssh"
 alias docker="color-docker"
 alias docker-compose="color-docker-compose"
